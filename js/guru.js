@@ -1,20 +1,6 @@
 if (!window.guru) window.guru = {};
 if (!guru.shapes) guru.shapes = {};
 
-if (!guru.loadTheme) {
-	guru.loadTheme = function(url) {
-		var link = document.createElement("link");
-
-		link.id = this._id;
-		link.rel = "stylesheet";
-		link.type = "text/css";
-		link.media = "all";
-		link.href = url;
-
-		document.getElementsByTagName("head")[0].appendChild(link);
-	};
-}
-
 if (!guru.error) {
 	guru.error = function(message) {
 		console.log('%c ERROR %c %s', 'background-color: red; color: white;', 'background-color: transparent; color: inherit;', message);
@@ -36,32 +22,6 @@ if (!guru.success) {
 if (!guru.log) {
 	guru.log = function(message) {
 		console.log('%c LOG %c %s', 'background-color: #1c1c1c; color: white;', 'background-color: transparent; color: inherit;', message);
-	};
-}
-
-if (!guru.createLoop) {
-	guru.createLoop = function(callback) {
-		function tick() {
-			callback();
-			window.requestAnimationFrame(tick);
-		}
-
-		window.requestAnimationFrame(tick);
-	};
-}
-
-if (!guru.random) {
-	guru.random = function(min, max, allowNegative) {
-		var result = Math.floor(Math.random() * (max - min + 1) + min);
-		var modifier = 1;
-
-		if (allowNegative) {
-			modifier = (Math.round(Math.random()) === 0 ? -1 : 1);
-		}
-
-		result *= modifier;
-
-		return result;
 	};
 }
 if(!guru.getJSON) {
@@ -86,6 +46,58 @@ if(!guru.getJSON) {
 if(!guru.createID) {
 	guru.createID = function() {
 		return Math.random().toString(36).substr(2, 9);
+	};
+}
+
+if (!guru.random) {
+	guru.random = function(min, max, allowNegative) {
+		var result = Math.floor(Math.random() * (max - min + 1) + min);
+		var modifier = 1;
+
+		if (allowNegative) {
+			modifier = (Math.round(Math.random()) === 0 ? -1 : 1);
+		}
+
+		result *= modifier;
+
+		return result;
+	};
+}
+
+if(!guru.randomDecimal) {
+	guru.randomDecimal = function(allowNegative) {
+		var modifier = 1;
+
+		if (allowNegative) {
+			modifier = (Math.round(Math.random()) === 0 ? -1 : 1);
+		}
+
+		return Math.random() * modifier;
+	};
+}
+
+if (!guru.createLoop) {
+	guru.createLoop = function(callback) {
+		function tick() {
+			callback();
+			window.requestAnimationFrame(tick);
+		}
+
+		window.requestAnimationFrame(tick);
+	};
+}
+
+if (!guru.loadTheme) {
+	guru.loadTheme = function(url) {
+		var link = document.createElement("link");
+
+		link.id = this._id;
+		link.rel = "stylesheet";
+		link.type = "text/css";
+		link.media = "all";
+		link.href = url;
+
+		document.getElementsByTagName("head")[0].appendChild(link);
 	};
 }
 if (!guru.Color) {

@@ -68,7 +68,7 @@
 
 		for (var i = 0; i < 4; i++) {
 			for (var j = 0; j < pollies[i].vertexCount; j++) {
-				pollies[i].moveVertex(j, guru.random(0, 1, true), guru.random(0, 1, true));
+				pollies[i].moveVertex(j, guru.randomDecimal(true) / 2, guru.randomDecimal(true) / 2);
 			}
 
 			canvas.render(pollies[i]);
