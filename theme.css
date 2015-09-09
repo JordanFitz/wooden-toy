@@ -19,7 +19,8 @@ html, body {
 	font-size: 32px;
 }
 #toy-enter.guru-gui-element, #toy-replay-button.guru-gui-element,
-#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element {
+#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element,
+#toy-guru.guru-gui-element, #toy-menu.guru-gui-element {
 	width: 50% !important;
 	font-family: "Merriweather", Helvetica, Arial, sans-serif;
 	background: #fff;
@@ -31,11 +32,12 @@ html, body {
 	border-radius: 4px;
 	padding: 10px 0;
 	outline: 0;
-	transition: background 0.15s ease-in-out, 
+	transition: background 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 }
 #toy-enter.guru-gui-element:hover, #toy-enter.guru-gui-element:active, 
 #toy-replay-button.guru-gui-element:hover, #toy-replay-button.guru-gui-element:active,
+#toy-menu.guru-gui-element:hover, #toy-menu.guru-gui-element:active,
 #toy-tin.guru-gui-element:hover, #toy-tin.guru-gui-element:active,
 #toy-jdan.guru-gui-element:hover, #toy-jdan.guru-gui-element:active {
 	background: #ccc;
@@ -47,16 +49,29 @@ html, body {
 	text-align: center;
 }
 #toy-tin {
-	width: 25% !important;
+	width: 15% !important;
 	display: inline-block !important;
 	margin-right: 16px;
 }
 #toy-jdan {
-	width: 25% !important;
+	width: 15% !important;
 	display: inline-block !important;
-	margin-left: 16px;
 }
-#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element {
+#toy-guru {
+	width: 15% !important;
+	display: inline-block !important;
+	margin-right: 16px;
+}
+#toy-guru.guru-gui-element {
+	background: #DA8125;
+	box-shadow: 0 3px 0 #A25F1A;
+	color: #fff;
+}
+#toy-guru.guru-gui-element:hover, #toy-guru.guru-gui-element:active {
+	background: #CC7923;
+	box-shadow: 0 1px 0 #A25F1A;
+}
+#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element, #toy-guru.guru-gui-element {
 	width: 100% !important;
 	font-size: 18px;
 }
