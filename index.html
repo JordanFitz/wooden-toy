@@ -7,6 +7,9 @@
 		<link rel="shortcut icon" href="favicon.png" />
 		<link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 		<style>
+			html, body {
+				overflow: hidden;
+			}
 			#guru-gui-inner_startgui {
 				width: auto !important;
 				height: auto !important;
@@ -24,10 +27,12 @@
 				color: #fff;
 				font-size: 32px;
 			}
-			#toy-enter.guru-gui-element, #toy-replay-button.guru-gui-element {
+			#toy-enter.guru-gui-element, #toy-replay-button.guru-gui-element,
+			#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element {
 				width: 50% !important;
 				font-family: "Merriweather", Helvetica, Arial, sans-serif;
 				background: #fff;
+				box-shadow: 0 3px 0 #aaa;
 				border: 0;
 				color: #000;
 				font-size: 32px;
@@ -35,12 +40,34 @@
 				border-radius: 4px;
 				padding: 10px 0;
 				outline: 0;
-				transition: background 0.15s ease-in-out;
+				transition: background 0.15s ease-in-out, 
+					box-shadow 0.15s ease-in-out;
 			}
 			#toy-enter.guru-gui-element:hover, #toy-enter.guru-gui-element:active, 
-			#toy-replay-button.guru-gui-element:hover, #toy-replay-button.guru-gui-element:active {
+			#toy-replay-button.guru-gui-element:hover, #toy-replay-button.guru-gui-element:active,
+			#toy-tin.guru-gui-element:hover, #toy-tin.guru-gui-element:active,
+			#toy-jdan.guru-gui-element:hover, #toy-jdan.guru-gui-element:active {
 				background: #ccc;
+				box-shadow: 0 1px 0 #aaa;
 				cursor: pointer;
+			}
+			#toy-link-container {
+				margin: 0 auto;
+				text-align: center;
+			}
+			#toy-tin {
+				width: 25% !important;
+				display: inline-block !important;
+				margin-right: 16px;
+			}
+			#toy-jdan {
+				width: 25% !important;
+				display: inline-block !important;
+				margin-left: 16px;
+			}
+			#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element {
+				width: 100% !important;
+				font-size: 18px;
 			}
 		</style>
 	</head>

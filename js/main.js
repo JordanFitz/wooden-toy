@@ -163,11 +163,14 @@
 		displayToy = false,
 		guiManager = new guru.GUIManager("startgui"),
 		titleLabel = new guru.GUILabel("WOODEN TOY", "toy-title").center(),
-		descLabel = new guru.GUILabel("A PROJECT MADE BY JORDANFITZ AND IN PART BY TINFOILBOY", "toy-desc").center(),
+		descLabel = new guru.GUILabel("A PROJECT MADE BY JORDANFITZ AND TINFOILBOY", "toy-desc").center(),
 		copywriteLabel = new guru.GUILabel("USES THE SONG \"WOODEN TOY\" BY AMON TOBIN", "toy-cpw").center(),
 		toyEnterButton = new guru.GUIElement("button", "ENTER THE TOY", "toy-enter").center(),
+		toyLinkContainer = new guru.GUIContainer("toy-link-container"),
+		tinfoilLinkButton = new guru.GUIElement("button", "TINFOILBOY WEBSITE", "toy-tin").center(),
+		jordanLinkButton = new guru.GUIElement("button", "JORDANFITZ WEBSITE", "toy-jdan").center(),
 		toyReplayButton = new guru.GUIElement("button", "REPLAY", "toy-replay-button").center();
-	
+		
 	toyEnterButton.setOnclick(function(e) {
 		e.preventDefault();
 		startToy();
@@ -178,6 +181,16 @@
 		guiManager.clearElements();
 		done = false;
 		woodenToy.play();
+	});
+	
+	tinfoilLinkButton.setOnclick(function(e) {
+		e.preventDefault();
+		document.location.href = "http://www.tinfoilboy.com";
+	});
+	
+	jordanLinkButton.setOnclick(function(e) {
+		e.preventDefault();
+		document.location.href = "http://www.jordanfitz.com";
 	});
 	
 	function startToy() {
@@ -227,14 +240,50 @@
 	
 			if (done) return;
 			
+			var minInnerSizeX = -1;
+			var maxInnerSizeX = -1;
+			var minInnerSizeY = -1;
+			var maxInnerSizeY = -1;
+			
 			for (var i = 0; i < 4; i++) {
 				for (var j = 0; j < pollies[i].vertexCount; j++) {
 					pollies[i].moveVertex(j, guru.randomDecimal(true) / 2, guru.randomDecimal(true) / 2);
+					if (i === 3) {
+						var coords = pollies[i].getVertexCoords(j);
+						if (minInnerSizeX === -1 && minInnerSizeY === -1 && maxInnerSizeX === -1 && maxInnerSizeY === -1) {
+							minInnerSizeX = coords.x;
+							maxInnerSizeX = coords.x;
+							minInnerSizeY = coords.y;
+							maxInnerSizeY = coords.y;
+						}
+						if (minInnerSizeX > coords.x) {
+							minInnerSizeX = coords.x;
+						}
+						if (maxInnerSizeX < coords.x) {
+							maxInnerSizeX = coords.x;
+						}
+						if (minInnerSizeY > coords.y) {
+							minInnerSizeY = coords.y;
+						}
+						if (maxInnerSizeY < coords.y) {
+							maxInnerSizeY = coords.y;
+						}
+					}
 				}
 	
 				canvas.render(pollies[i]);
 			}
-		
+			
+			var lyricCalcSize = Math.floor((((maxInnerSizeX - minInnerSizeX) + (maxInnerSizeY - minInnerSizeY)) / 15) + (currentLyric.getTextWidth() / 6));
+			
+			// Limit the minimum size of the text to 28
+			if (lyricCalcSize < 28)
+				lyricCalcSize = 28;
+			
+			console.log(lyricCalcSize);
+			
+			lyricSize = lyricCalcSize;
+			
 			canvas.render(currentLyric);
 		}
 	}
@@ -263,6 +312,9 @@
 			guiManager.addElement(descLabel);
 			guiManager.addElement(copywriteLabel);
 			guiManager.addElement(toyEnterButton);
+			toyLinkContainer.addElement(tinfoilLinkButton);
+			toyLinkContainer.addElement(jordanLinkButton);
+			guiManager.addElement(toyLinkContainer);
 		}
 
 		guru.createLoop(render);

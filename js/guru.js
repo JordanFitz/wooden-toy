@@ -194,6 +194,10 @@ if (!guru.shapes.Polygon) {
 		this._vertices[i][0] += x;
 		this._vertices[i][1] += y;
 	}
+	
+	guru.shapes.Polygon.prototype.getVertexCoords = function(i) {
+		return { x: this._vertices[i][0], y: this._vertices[i][1] };
+	}
 
 	guru.shapes.Polygon.prototype.render = function(context) {
 		var oldStyle = context.fillStyle;
@@ -363,6 +367,7 @@ if (!guru.Text) {
 		this._y = y;
 		this._font = font;
 		this._size = size;
+		this._width = 0;
 		this._color = color;
 		this._centerVertical = false;
 		this._centerHorizontal = false;
@@ -392,6 +397,10 @@ if (!guru.Text) {
 		
 		return this;
 	};
+	
+	guru.Text.prototype.getTextWidth = function(text) {
+		return this._width;
+	};
 
 	guru.Text.prototype.render = function(context) {
 		var oldBaseline = context.textBaseline,
@@ -404,6 +413,8 @@ if (!guru.Text) {
 
 		context.fillStyle = this._color._css;
 		context.font = this._size + 'px "' + this._font + '"';
+
+		this._width = context.measureText(this._text).width;
 
 		context.fillText(this._text, this._x, this._y);
 
@@ -587,6 +598,34 @@ if (!guru.GUIManager) {
 		style.appendChild(document.createTextNode("@import url('" + url + "');"));
 
 		this._container.appendChild(style);
+
+		return this;
+	};
+}
+if (!guru.GUIContainer) {
+	guru.GUIContainer = function(id) {
+		this._elements = [];
+
+		this._element = document.createElement("div");
+
+		this._id = (id || guru.createID());
+
+		this._element.id = this._id;
+		this._element.style["z-index"] = "999";
+		this._element.style.position = "relative";
+		this._element.className = "guru-gui-container-element";
+	};
+	
+	guru.GUIContainer.prototype.clearElements = function() {
+		while (this._element.hasChildNodes()) {
+			this._element.removeChild(this._element.lastChild);
+		}
+		
+		return this;
+	};
+
+	guru.GUIContainer.prototype.addElement = function(element) {
+		this._element.appendChild(element._element);
 
 		return this;
 	};
