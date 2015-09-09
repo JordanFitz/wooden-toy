@@ -380,6 +380,18 @@ if (!guru.Text) {
 
 		return this;
 	};
+	
+	guru.Text.prototype.setColor = function(color) {
+		this._color = color;
+		
+		return this;
+	};
+	
+	guru.Text.prototype.setSize = function(size) {
+		this._size = size;
+		
+		return this;
+	};
 
 	guru.Text.prototype.render = function(context) {
 		var oldBaseline = context.textBaseline,
@@ -546,6 +558,14 @@ if (!guru.GUIManager) {
 		this._container.appendChild(this._inner);
 
 		document.body.appendChild(this._container);
+	};
+	
+	guru.GUIManager.prototype.clearElements = function() {
+		while (this._inner.hasChildNodes()) {
+			this._inner.removeChild(this._inner.lastChild);
+		}
+		
+		return this;
 	};
 
 	guru.GUIManager.prototype.addElement = function(element) {
