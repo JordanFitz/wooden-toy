@@ -289,6 +289,7 @@
 	}
 
 	function init() {
+		guru.loadTheme("theme.css");
 		hasBypass = location.hash.indexOf("bypass-continue-screen") > -1;
 		var index = 0;
 
