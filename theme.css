@@ -61,6 +61,7 @@ html, body {
 	width: 15% !important;
 	display: inline-block !important;
 	margin-right: 16px;
+	cursor: pointer;
 }
 #toy-guru.guru-gui-element {
 	background: #DA8125;
