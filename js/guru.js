@@ -195,6 +195,13 @@ if (!guru.shapes.Polygon) {
 		this._vertices[i][1] += y;
 	}
 
+	guru.shapes.Polygon.prototype.getVertexCoords = function(i) {
+		return {
+			x: this._vertices[i][0],
+			y: this._vertices[i][1]
+		};
+	}
+
 	guru.shapes.Polygon.prototype.render = function(context) {
 		var oldStyle = context.fillStyle;
 		context.fillStyle = this._color._css;
@@ -361,6 +368,7 @@ if (!guru.Text) {
 		this._text = text;
 		this._x = x;
 		this._y = y;
+		this._rotation = 0;
 		this._font = font;
 		this._size = size;
 		this._color = color;
@@ -380,16 +388,22 @@ if (!guru.Text) {
 
 		return this;
 	};
-	
+
 	guru.Text.prototype.setColor = function(color) {
 		this._color = color;
-		
+
 		return this;
 	};
-	
+
 	guru.Text.prototype.setSize = function(size) {
 		this._size = size;
-		
+
+		return this;
+	};
+
+	guru.Text.prototype.rotate = function(angle) {
+		this._rotation += angle;
+
 		return this;
 	};
 
@@ -559,12 +573,12 @@ if (!guru.GUIManager) {
 
 		document.body.appendChild(this._container);
 	};
-	
+
 	guru.GUIManager.prototype.clearElements = function() {
 		while (this._inner.hasChildNodes()) {
 			this._inner.removeChild(this._inner.lastChild);
 		}
-		
+
 		return this;
 	};
 
@@ -577,7 +591,7 @@ if (!guru.GUIManager) {
 	guru.GUIManager.prototype.loadTheme = function(url) {
 		var style = document.createElement("style");
 
-		if(!(/firefox/.test(navigator.userAgent.toLowerCase()))) {
+		if (!(/firefox/.test(navigator.userAgent.toLowerCase()))) {
 			guru.warn("Scoped styles are not supported in your browser, this theme will be applied to the entire document. (loadTheme: \"" + url + "\")");
 		}
 
