@@ -169,7 +169,9 @@
 		toyLinkContainer = new guru.GUIContainer("toy-link-container"),
 		tinfoilLinkButton = new guru.GUIElement("button", "TINFOILBOY WEBSITE", "toy-tin").center(),
 		jordanLinkButton = new guru.GUIElement("button", "JORDANFITZ WEBSITE", "toy-jdan").center(),
-		toyReplayButton = new guru.GUIElement("button", "REPLAY", "toy-replay-button").center();
+		madeWithGuru = new guru.GUIElement("button", "MADE WITH GURU", "toy-guru").center(),
+		toyReplayButton = new guru.GUIElement("button", "REPLAY", "toy-replay-button").center(),
+		backToMenu = new guru.GUIElement("button", "BACK TO MENU", "toy-menu").center();
 		
 	toyEnterButton.setOnclick(function(e) {
 		e.preventDefault();
@@ -181,6 +183,16 @@
 		guiManager.clearElements();
 		done = false;
 		woodenToy.play();
+	});
+	
+	backToMenu.setOnclick(function(e) {
+		e.preventDefault();
+		constructMenu();
+	});
+	
+	madeWithGuru.setOnclick(function(e) {
+		e.preventDefault();
+		document.location.href = "https://github.com/jordanfitz/guru";
 	});
 	
 	tinfoilLinkButton.setOnclick(function(e) {
@@ -195,6 +207,7 @@
 	
 	function startToy() {
 		guiManager.clearElements();
+		done = false;
 		displayToy = true;
 
 		woodenToy.src = "audio/wooden-toy.mp3";
@@ -204,6 +217,7 @@
 			clearInterval(colorInterval);
 			done = true;
 			guiManager.addElement(toyReplayButton);
+			guiManager.addElement(backToMenu);
 		};
 	
 		woodenToy.onplay = function() {
@@ -280,12 +294,23 @@
 			if (lyricCalcSize < 28)
 				lyricCalcSize = 28;
 			
-			console.log(lyricCalcSize);
-			
 			lyricSize = lyricCalcSize;
 			
 			canvas.render(currentLyric);
 		}
+	}
+
+	function constructMenu() {
+		toyLinkContainer.clearElements();
+		guiManager.clearElements();
+		guiManager.addElement(titleLabel);
+		guiManager.addElement(descLabel);
+		guiManager.addElement(copywriteLabel);
+		guiManager.addElement(toyEnterButton);
+		toyLinkContainer.addElement(madeWithGuru);
+		toyLinkContainer.addElement(tinfoilLinkButton);
+		toyLinkContainer.addElement(jordanLinkButton);
+		guiManager.addElement(toyLinkContainer);
 	}
 
 	function init() {
@@ -309,14 +334,8 @@
 		if (hasBypass) {
 			startToy();
 		}
-		else {	
-			guiManager.addElement(titleLabel);
-			guiManager.addElement(descLabel);
-			guiManager.addElement(copywriteLabel);
-			guiManager.addElement(toyEnterButton);
-			toyLinkContainer.addElement(tinfoilLinkButton);
-			toyLinkContainer.addElement(jordanLinkButton);
-			guiManager.addElement(toyLinkContainer);
+		else {
+			constructMenu();
 		}
 
 		guru.createLoop(render);
