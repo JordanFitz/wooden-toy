@@ -18,7 +18,8 @@ html, body {
 	color: #fff;
 	font-size: 32px;
 }
-#toy-enter.guru-gui-element, #toy-replay-button.guru-gui-element {
+#toy-enter.guru-gui-element, #toy-replay-button.guru-gui-element,
+#toy-tin.guru-gui-element, #toy-jdan.guru-gui-element {
 	width: 50% !important;
 	font-family: "Merriweather", Helvetica, Arial, sans-serif;
 	background: #fff;
