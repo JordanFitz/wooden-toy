@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 html, body {
 	overflow: hidden;
 }
->>>>>>> 1ee36dc7efa9b8bb43ba91027048179694cca624
 #guru-gui-inner_startgui {
 	width: auto !important;
 	height: auto !important;
@@ -60,5 +57,4 @@ html, body {
 #toy-tin.guru-gui-element, #toy-jdan.guru-gui-element {
 	width: 100% !important;
 	font-size: 18px;
->>>>>>> 1ee36dc7efa9b8bb43ba91027048179694cca624
 }
